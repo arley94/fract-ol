@@ -1,37 +1,52 @@
 # NAMES
 NAME = fract-ol
-NAME_BONUS = 
-
-# LIBS
-LIBS_DIR = libs/
-FT_DIR = libft/libft.a
-FTPRINTF_DIR = libftprintf/libftprintf.a
-LIBFT = $(addprefix $(LIBS_DIR), $(FT_DIR))
-LIBFTPRINTF = $(addprefix $(LIBS_DIR), $(FTPRINTF_DIR))
-
-# SOURCE FILES
-SRC_DIR = src/
-BONUS_DIR = bonus/
-SRC_FILES = main.c 	\
-			complex_set.c \
-			fractals.c \
-			draw.c \
-			events_handlers.c \
-			zoom.c \
-			parse_args.c \
-			clean_exit.c
-
-SRC 		= $(addprefix $(SRC_DIR), $(SRC_FILES))
-
-
-# OBJECT FILES
-OBJ_FILES = $(SRC:.c=.o)
 
 # COMPILER OPTIONS
 CC		= gcc
 FLAGS	= -Wall -Werror -Wextra -g3
-LMX_FLAGS = -lmlx -lXext -lX11
-INCLUDE = -I /usr/include
+
+
+# MINILIBX
+MLX_PATH	= minilibx-linux/
+MLX_NAME	= libmlx.a
+MLX			= $(MLX_PATH)$(MLX_NAME)
+MLX_FLAGS = -lmlx -lXext -lX11
+
+# LIBS
+LIBS_PATH = libs/
+
+# LIBFT
+LIBFT_PATH 	= $(LIBS_PATH)libft/
+LIBFT_NAME 	= libft.a
+LIBFT		= $(LIBFT_PATH)$(LIBFT_NAME)
+
+# LIBFTPRINTF
+LIBFTPRINTF_PATH 	= $(LIBS_PATH)libftprintf/
+LIBFTPRINTF_NAME 	= libftprintf.a
+LIBFTPRINTF			= $(LIBFTPRINTF_PATH)$(LIBFTPRINTF_NAME)
+
+#INCLUDES
+INCLUDE = -I ./includes/
+
+# SOURCE FILES
+SRC_PATH	= src/
+SRC_FILES	= main.c 	\
+			  complex_set.c \
+			  fractals.c \
+			  draw.c \
+			  events_handlers.c \
+			  zoom.c \
+			  parse_args.c \
+			  clean_exit.c
+SRC 		= $(addprefix $(SRC_DIR), $(SRC_FILES))
+
+
+# OBJECT FILES
+OBJ_PATH	= obj/
+OBJ_FILES	= $(SRC:.c=.o)
+OBJ 		= $(addprefix $(OBJ_PATH), $(OBJ_FILES))
+
+# COMMANDS
 RM		= rm -f
 
 # COLORS
@@ -45,38 +60,45 @@ CLEAR	=	\033[0m
 # MAKEFILE RULES
 all:	$(NAME)
 
-$(NAME):	$(OBJ_FILES)
-	@make -C libs/libft
-	@make -C libs/libftprintf
+$(NAME): $(MLX) $(LIBFT) $(LIBFTPRINTF) $(OBJ) 
 	@echo "$(PINK)Compiling $(NAME).$(CLEAR)"
-	$(CC) $(FLAGS) $(OBJ_FILES) $(INCLUDE) $(LIBFT) $(LIBFTPRINTF) -o $(NAME) $(LMX_FLAGS)
+	$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(INCLUDE) $(LIBFT) $(LIBFTPRINTF) $(MLX) $(MLX_FLAGS)
 	@echo "$(GREEN)[OK]\n$(CLEAR)$(GREEN)Success!$(CLEAR)\n"
 
-bonus:	$(NAME_BONUS)
+$(MLX):
+	@echo "Making MiniLibX..."
+	@make -sC $(MLX_PATH)
 
-$(NAME_BONUS):	$(OBJ_BONUS_FILES)
-	@make -C libs/libft
-	@make -C libs/libftprintf
-	@echo "$(PINK)Compiling the CHECKER program.$(CLEAR)"
-	$(CC) $(FLAGS) $(OBJ_BONUS_FILES) $(INCLUDE) $(LIBFT) $(LIBFTPRINTF) -o $(NAME_BONUS)
-	@echo "$(GREEN)[OK]\n$(CLEAR)$(GREEN)Success!$(CLEAR)\n"
+$(LIBFT):
+	@echo "Making libft..."
+	@make -sC $(LIBFT_PATH)
 
-%.o: %.c
-	$(CC) $(FLAGS) -c -o $@ $<
+$(LIBFTPRINTF):
+	@echo "Making libftprintf..."
+	@make -sC $(LIBFTPRINTF_PATH)
+
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c
+	$(CC) $(FLAGS) -c -o $@ $< $(INCLUDE)
+
+$(OBJ): $(OBJ_PATH)
+
+$(OBJ_PATH):
+	@mkdir $(OBJ_PATH)
 
 clean:
-	@echo "$(PINK)Removing compiled files.$(CLEAR)"
-	@make clean -C libs/libft
-	@make clean -C libs/libftprintf
-	$(RM) $(OBJ_FILES)
+	@echo "$(PINK)Removing .o object files.$(CLEAR)"
+	@rm -rf $(OBJ_PATH)
+	@make clean -C $(LIBFT_PATH)
+	@make clean -C $(LIBFTPRINTF_PATH)
+	@make clean -C $(MLX_PATH)
 	@echo "$(GREEN)Object files removed correctly\n$(CLEAR)"
 
 fclean: clean
-	@make fclean -C libs/libft
-	@make fclean -C libs/libftprintf
-	$(RM) $(NAME) $(NAME_BONUS)
+	@make fclean -sC $(LIBFT_PATH)
+	@make fclean -sC $(LIBFTPRINTF_PATH)
+	$(RM) $(NAME)
 	@echo "$(GREEN)Exec. files removed correctly\nSuccess!$(CLEAR)"
 
 re: fclean all
 
-.PHONY:		all bonus clean fclean re
+.PHONY:		all clean fclean re
