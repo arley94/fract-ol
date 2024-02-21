@@ -6,12 +6,11 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 13:36:52 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/02/20 07:56:06 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/02/21 07:14:54 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
-
 
 static void	my_mlx_pixel_put(t_img_data *img, int x, int y, int color)
 {
@@ -20,7 +19,6 @@ static void	my_mlx_pixel_put(t_img_data *img, int x, int y, int color)
 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
-
 
 static int	interpolate(int startcolor, int endcolor, double fraction)
 {

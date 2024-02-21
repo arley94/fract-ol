@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:28:19 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/02/16 16:11:13 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/02/21 07:14:07 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,3 @@ int	ft_atof(const char *nptr, double *nb)
 	*nb = tmp_nb;
 	return (1);
 }
-
