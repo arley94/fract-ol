@@ -47,7 +47,6 @@ INCLUDE = -I ./includes/
 # SOURCE FILES
 SRC_PATH	= src/
 SRC_FILES	= main.c 	\
-			  complex_set.c \
 			  fractals.c \
 			  draw.c \
 			  events_handlers.c \

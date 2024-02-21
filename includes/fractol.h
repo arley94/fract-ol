@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 08:47:41 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/02/21 14:24:38 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/02/21 20:02:08 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ typedef struct s_fractol_data
 
 /*  Initializations functions  */
 void	parse_args(int argc, const char *argv[], t_fractol_data *f);
-void	set_copmplex_square(t_fractol_data *f);
 
 /*  Fractals  */
 int		mandelbrot(double cr, double ci);
@@ -106,8 +105,7 @@ int		keyboard_handler(int key_code, void *param);
 int		close_handler(void *param);
 
 /*  render functios  */
-void	zoom(t_zoom zoom, t_fractol_data *f);
-void	set_square_center(int x, int y, t_fractol_data *f);
+void	zoom(int x, int y, t_zoom zoom, t_fractol_data *f);
 void	draw_image(t_fractol_data *f);
 
 /*  exits functions  */

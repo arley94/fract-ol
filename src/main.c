@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:55:54 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/02/20 08:48:57 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/02/21 20:01:06 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	init_fractol_data(t_fractol_data *f)
 	f->kr = 0.353;
 	f->ki = 0.288;
 	f->color = 0x550066;
+	f->min_r = f->r_center - f->r_span / 2;
+	f->max_i = f->i_center + f->i_span / 2;
 }
 
 void	ft_init_mlx(t_fractol_data *f)
@@ -52,7 +54,6 @@ int	main(int argc, char const *argv[])
 	init_fractol_data(&f_data);
 	parse_args(argc, argv, &f_data);
 	ft_init_mlx(&f_data);
-	set_copmplex_square(&f_data);
 	draw_image(&f_data);
 	mlx_mouse_hook(f_data.win_ptr, mouse_handler, &f_data);
 	mlx_key_hook(f_data.win_ptr, keyboard_handler, &f_data);
