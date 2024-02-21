@@ -1,5 +1,5 @@
 # NAMES
-NAME = fract-ol
+NAME = fractol
 
 # COMPILER OPTIONS
 CC		= gcc
@@ -59,8 +59,8 @@ SRC 		= $(addprefix $(SRC_DIR), $(SRC_FILES))
 
 # OBJECT FILES
 OBJ_PATH	= obj/
-OBJ_FILES	= $(SRC:.c=.o)
-OBJ 		= $(addprefix $(OBJ_PATH), $(OBJ_FILES))
+OBJ_FILES	:= $(SRC:.c=.o)
+OBJ 		:= $(addprefix $(OBJ_PATH), $(OBJ_FILES))
 
 # COMMANDS
 RM		= rm -f
@@ -76,9 +76,9 @@ CLEAR	=	\033[0m
 # MAKEFILE RULES
 all:	$(NAME)
 
-$(NAME): $(MLX) $(LIBFT) $(LIBFTPRINTF) $(OBJ) 
+$(NAME): $(MLX) $(LIBFT) $(LIBFTPRINTF) $(OBJ_PATH) $(OBJ)
 	@echo "$(PINK)Compiling $(NAME).$(CLEAR)"
-	$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(INCLUDE) $(LIBFT) $(LIBFTPRINTF) $(MLX) $(MLX_FLAGS)
+	@$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(INCLUDE) $(LIBFT) $(LIBFTPRINTF) $(MLX) $(MLX_FLAGS)
 	@echo "$(GREEN)[OK]\n$(CLEAR)$(GREEN)Success!$(CLEAR)\n"
 
 $(MLX):
@@ -94,9 +94,9 @@ $(LIBFTPRINTF):
 	@make -sC $(LIBFTPRINTF_PATH)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
-	$(CC) $(FLAGS) -c -o $@ $< $(INCLUDE)
+	@$(CC) $(FLAGS) -c -o $@ $< $(INCLUDE)
 
-$(OBJ): $(OBJ_PATH)
+#$(OBJ): $(OBJ_PATH)
 
 $(OBJ_PATH):
 	@mkdir $(OBJ_PATH)
@@ -104,15 +104,15 @@ $(OBJ_PATH):
 clean:
 	@echo "$(PINK)Removing .o object files.$(CLEAR)"
 	@rm -rf $(OBJ_PATH)
-	@make clean -C $(LIBFT_PATH)
-	@make clean -C $(LIBFTPRINTF_PATH)
-	@make clean -C $(MLX_PATH)
+	@make clean -sC $(LIBFT_PATH)
+	@make clean -sC $(LIBFTPRINTF_PATH)
+	@make clean -sC $(MLX_PATH)
 	@echo "$(GREEN)Object files removed correctly\n$(CLEAR)"
 
 fclean: clean
 	@make fclean -sC $(LIBFT_PATH)
 	@make fclean -sC $(LIBFTPRINTF_PATH)
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 	@echo "$(GREEN)Exec. files removed correctly\nSuccess!$(CLEAR)"
 
 re: fclean all
