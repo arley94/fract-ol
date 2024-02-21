@@ -5,12 +5,28 @@ NAME = fract-ol
 CC		= gcc
 FLAGS	= -Wall -Werror -Wextra -g3
 
+# DEFINE OS MAC OR LINUX
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S), Linux)
+    FLAGS += -D LINUX
+	OS = linux
+else
+	FLAGS += -D MAC
+	OS = mac
+endif
 
 # MINILIBX
-MLX_PATH	= minilibx-linux/
-MLX_NAME	= libmlx.a
-MLX			= $(MLX_PATH)$(MLX_NAME)
-MLX_FLAGS = -lmlx -lXext -lX11
+ifeq ($(OS), linux)
+	MLX_PATH	= minilibx-linux/
+	MLX_NAME	= libmlx.a
+	MLX			= $(MLX_PATH)$(MLX_NAME)
+	MLX_FLAGS 	= -lmlx -lXext -lX11
+else
+	MLX_PATH	= minilibx-mac/
+	MLX_NAME	= libmlx.a
+	MLX			= $(MLX_PATH)$(MLX_NAME)
+	MLX_FLAGS	= -lmlx -framework OpenGL -framework AppKit
+endif
 
 # LIBS
 LIBS_PATH = libs/
