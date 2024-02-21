@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 08:47:41 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/02/21 14:05:07 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:24:38 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@
 
 # ifdef LINUX 
 #  include "../minilibx-linux/mlx.h"
+#  define OS 0
 # else
 #  include "../minilibx-mac/mlx.h"
+#  define OS 1
 # endif
 
 
