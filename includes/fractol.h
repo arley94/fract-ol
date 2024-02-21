@@ -6,29 +6,42 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 08:47:41 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/02/20 08:27:35 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:05:07 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef FRACTOL_H
+# define FRACTOL_H
 
-#include "mlx.h"
-#include "../libs/libft/libft.h"
-#include "../libs//libftprintf/ft_printf.h"
+# include "../libs/libft/libft.h"
+# include "../libs//libftprintf/ft_printf.h"
+
+# ifdef LINUX 
+#  include "../minilibx-linux/mlx.h"
+# else
+#  include "../minilibx-mac/mlx.h"
+# endif
 
 
 /*  Dimensions	*/
 # define WIDTH 600
 # define HEIGHT 600
+
+/*  Iterations  */
 # define MAX_ITERATIONS 60
 
-#define	INITIAL_CENTER_X -0.5
-#define INITIAL_CENTER_Y 0
-#define	INITIAL_REAL_SPAN 3
+/*  Complex set  */
+# define INITIAL_CENTER_X -0.5
+# define INITIAL_CENTER_Y 0
+# define INITIAL_REAL_SPAN 3
 
-#define CLOSE_EVENT_NUMBER 17
+/*  Events  */
+# define CLOSE_EVENT_NUMBER 17
 
+/*  Key codes  */
 # define ESCAPE_KEY_CODE 65307
 
+/*  Types  */
 typedef enum e_fractal_set
 {
 	MANDELBROT,
@@ -77,16 +90,26 @@ typedef struct s_fractol_data
 	int				color;
 }	t_fractol_data;
 
+/*  Initializations functions  */
 void	parse_args(int argc, const char *argv[], t_fractol_data *f);
 void	set_copmplex_square(t_fractol_data *f);
+
+/*  Fractals  */
 int		mandelbrot(double cr, double ci);
 int		julia(double cr, double ci, double kr, double ki);
-void	draw_image(t_fractol_data *f);
+
+/*  Events handlers  */
 int		mouse_handler(int button, int x, int y, void *param);
 int		keyboard_handler(int key_code, void *param);
 int		close_handler(void *param);
+
+/*  render functios  */
 void	zoom(t_zoom zoom, t_fractol_data *f);
 void	set_square_center(int x, int y, t_fractol_data *f);
-void	parse_args(int argc, const char *argv[], t_fractol_data *f);
+void	draw_image(t_fractol_data *f);
+
+/*  exits functions  */
 void	clean_and_exit(t_fractol_data *f, int status);
 void	display_help_exit(void);
+
+#endif
