@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:46:08 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/02/22 12:46:12 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/02/22 14:54:24 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ void	parse_args(int argc, const char *argv[], t_fractol_data *f)
 		f->set = JULIA;
 	else if (ft_strncmp(argv[1], "MJ", 3) == 0)
 		init_aux_fractol(f);
+	else if (ft_strncmp(argv[1], "B", 2) == 0)
+		f->set = BURNING_SHIP;
 	else
 		display_help_exit(f);
 	if (f->set == JULIA)
