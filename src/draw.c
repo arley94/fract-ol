@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 13:36:52 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/02/22 14:55:52 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:25:48 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ static int	calculate_fractal(t_fractol_data *f, double pr, double pi)
 		nb_iter = julia(pr, pi, f->kr, f->ki);
 	else if (f->set == BURNING_SHIP)
 		nb_iter = burning_ship(pr, pi);
+	else if (f->set == BURNING_SHIP_FLIP)
+		nb_iter = burning_ship_flip(pr, pi);
 	return (nb_iter);
 }
 

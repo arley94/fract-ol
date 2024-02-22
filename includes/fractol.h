@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 08:47:41 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/02/22 14:54:14 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:24:24 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ typedef enum e_fractal_set
 {
 	MANDELBROT,
 	JULIA,
-	BURNING_SHIP
+	BURNING_SHIP,
+	BURNING_SHIP_FLIP
 }				t_fractal_set;
 
 typedef enum e_mouse_events
@@ -103,6 +104,7 @@ void	parse_args(int argc, const char *argv[], t_fractol_data *f);
 int		mandelbrot(double cr, double ci);
 int		julia(double cr, double ci, double kr, double ki);
 int		burning_ship(double cr, double ci);
+int		burning_ship_flip(double cr, double ci);
 
 /*  Events handlers  */
 int		mouse_handler_1(int button, int x, int y, void *param);
