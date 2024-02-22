@@ -54,7 +54,8 @@ SRC_FILES	= main.c 	\
 			  render.c \
 			  parse_args.c \
 			  init.c \
-			  clean_exit.c
+			  clean_exit.c \
+			  colors.c
 SRC 		= $(addprefix $(SRC_DIR), $(SRC_FILES))
 
 

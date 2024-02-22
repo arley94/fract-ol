@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 12:11:29 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/02/22 12:34:59 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/02/22 17:30:40 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	init_fractol_data(t_fractol_data *f)
 	f->kr = 0.353;
 	f->ki = 0.288;
 	f->color = 0x550066;
+	f->pallette = NULL;
+	f->color_shift = 0;
 	f->min_r = INITIAL_CENTER_X - f->r_span / 2;
 	f->max_i = INITIAL_CENTER_Y + f->i_span / 2;
 	f->julia = NULL;
@@ -37,6 +39,7 @@ void	init_aux_fractol(t_fractol_data *f)
 	init_fractol_data(f->julia);
 	f->julia->set = JULIA;
 	f->julia->mlx_ptr = f->mlx_ptr;
+	f->julia->pallette = f->pallette;
 }
 
 void	init_mlx(t_fractol_data *f)

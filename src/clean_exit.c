@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:10:57 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/02/22 12:58:05 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/02/22 20:56:26 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	print_fractal_options(void)
 	ft_printf("Which fractal would you like to view?\n");
 	ft_printf("\tM - Mandelbrot\n");
 	ft_printf("\tJ - Julia\n");
+	ft_printf("\tB - Bourning Ship\n");
+	ft_printf("\tBF - Bourning Ship Flipped\n");
 	ft_printf("\tMJ - Mandelbrot and Julia in parallel\n");
 	ft_printf("\e[33mUsage example:\t./fractol <type>\n\t\t./fractol M\e[0m\n");
 	ft_printf("\nFor Julia, you may specify starting values for the\n");
@@ -68,6 +70,8 @@ void	clean_and_exit(t_fractol_data *f, int status)
 		close_window(f->julia);
 		free(f->julia);
 	}
+	if (f->pallette)
+		free(f->pallette);
 	close_window(f);
 	if (f->mlx_ptr)
 	{

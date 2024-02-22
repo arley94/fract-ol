@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:55:54 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/02/22 12:45:14 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:29:02 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	main(int argc, char const *argv[])
 	if (!f_data.mlx_ptr)
 		clean_and_exit(&f_data, EXIT_FAILURE);
 	parse_args(argc, argv, &f_data);
+	create_colors_pallette(&f_data);
 	init_mlx(&f_data);
 	draw_images(&f_data);
 	set_events_handlers(&f_data);

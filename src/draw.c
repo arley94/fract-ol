@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 13:36:52 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/02/22 15:25:48 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/02/22 16:36:12 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,47 +18,6 @@ static void	my_mlx_pixel_put(t_img_data *img, int x, int y, int color)
 
 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
-}
-
-static int	interpolate(int startcolor, int endcolor, double fraction)
-{
-	int	start_rgb[3];
-	int	end_rgb[3];
-
-	start_rgb[0] = ((startcolor >> 16) & 0xFF);
-	start_rgb[1] = ((startcolor >> 8) & 0xFF);
-	start_rgb[2] = ((startcolor >> 0) & 0xFF);
-	end_rgb[0] = ((endcolor >> 16) & 0xFF);
-	end_rgb[1] = ((endcolor >> 8) & 0xFF);
-	end_rgb[2] = ((endcolor >> 0) & 0xFF);
-	start_rgb[0] = (end_rgb[0] - start_rgb[0]) * fraction + start_rgb[0];
-	start_rgb[1] = (end_rgb[1] - start_rgb[1]) * fraction + start_rgb[1];
-	start_rgb[2] = (end_rgb[2] - start_rgb[2]) * fraction + start_rgb[2];
-	return (0xFF << 24 | start_rgb[0] << 16 | start_rgb[1] << 8 | start_rgb[2]);
-}
-
-static int	get_color(int nb_iter, t_fractol_data *f)
-{
-	double	fraction;
-	int		color1;
-	int		color2;
-
-	if (nb_iter == MAX_ITERATIONS)
-		return (0);
-	else if ((nb_iter + 1) <= MAX_ITERATIONS / 2)
-	{
-		fraction = (double)(nb_iter + 1) / (MAX_ITERATIONS / 2);
-		color1 = 0x000000;
-		color2 = f->color;
-	}
-	else
-	{
-		fraction = (double)((nb_iter + 1) - MAX_ITERATIONS / 2)
-			/ (MAX_ITERATIONS / 2);
-		color1 = f->color;
-		color2 = 0xFFFFFF;
-	}
-	return (interpolate(color1, color2, fraction));
 }
 
 static int	calculate_fractal(t_fractol_data *f, double pr, double pi)

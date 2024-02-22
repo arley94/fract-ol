@@ -6,13 +6,14 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 08:47:41 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/02/22 15:24:24 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:28:52 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
+# include <math.h>
 # include "../libs/libft/libft.h"
 # include "../libs//libftprintf/ft_printf.h"
 
@@ -45,6 +46,9 @@
 # define RIGHT_KEY_CODE		65363
 # define UP_KEY_CODE		65362
 # define DOWN_KEY_CODE 		65364
+# define S_KEY_CODE 		115
+# define C_KEY_CODE			99
+# define R_KEY_CODE			114
 
 /*  Types  */
 typedef enum e_fractal_set
@@ -91,6 +95,8 @@ typedef struct s_fractol_data
 	double					kr;
 	double					ki;
 	int						color;
+	int						*pallette;
+	int						color_shift;
 	struct s_fractol_data	*julia;
 }	t_fractol_data;
 
@@ -99,6 +105,7 @@ void	init_fractol_data(t_fractol_data *f);
 void	init_aux_fractol(t_fractol_data *f);
 void	init_mlx(t_fractol_data *f);
 void	parse_args(int argc, const char *argv[], t_fractol_data *f);
+void	generate_colors_pallette(t_fractol_data *f);
 
 /*  Fractals  */
 int		mandelbrot(double cr, double ci);
@@ -120,7 +127,14 @@ void	close_window(t_fractol_data *f);
 /*  render functios  */
 void	zoom(int x, int y, t_zoom zoom, t_fractol_data *f);
 void	move(int direction, t_fractol_data *f);
+void	shift_pallette(t_fractol_data *f);
+void	change_pallete(t_fractol_data *f);
 void	draw_image(t_fractol_data *f);
+int		get_color(int nb_iter, t_fractol_data *f);
+void	create_colors_pallette(t_fractol_data *f);
+void	interpolated_pallette(t_fractol_data *f);
+void	random_pallette(t_fractol_data *f);
+void	generate_random_pallette(t_fractol_data *f);
 
 /*  exits functions  */
 void	clean_and_exit(t_fractol_data *f, int status);

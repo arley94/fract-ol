@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zoom.c                                             :+:      :+:    :+:   */
+/*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:47:19 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/02/22 14:20:39 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/02/22 20:09:48 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,29 @@ void	move(int direction, t_fractol_data *f)
 		f->max_i = f->max_i + (f->i_span / 10);
 	else if (direction == DOWN_KEY_CODE)
 		f->max_i = f->max_i - (f->i_span / 10);
+	draw_image(f);
+}
+
+void	shift_pallette(t_fractol_data *f)
+{
+	f->color_shift = rand() % MAX_ITERATIONS;
+	if (f->julia)
+		f->julia->color_shift = f->color_shift;
+	draw_image(f);
+}
+
+void	change_pallete(t_fractol_data *f)
+{
+	f->color_shift = 0;
+	if (f->julia)
+		f->julia->color_shift = 0;
+	f->color = rand();
+	interpolated_pallette(f);
+	draw_image(f);
+}
+
+void	generate_random_pallette(t_fractol_data *f)
+{
+	random_pallette(f);
 	draw_image(f);
 }
