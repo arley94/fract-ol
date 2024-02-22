@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:22:45 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/02/22 12:21:34 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/02/22 14:22:35 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ int	keyboard_handler_1(int key_code, void *param)
 			clean_and_exit(f, EXIT_SUCCESS);
 		close_window(param);
 	}
+	if (key_code == LEFT_KEY_CODE || key_code == RIGHT_KEY_CODE
+		|| key_code == UP_KEY_CODE || key_code == DOWN_KEY_CODE)
+		move(key_code, f);
 	return (0);
 }
 

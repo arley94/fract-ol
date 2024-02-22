@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 08:47:41 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/02/22 12:43:32 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/02/22 14:54:14 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 #  define OS 1
 # endif
 
-
 /*  Dimensions	*/
 # define WIDTH 600
 # define HEIGHT 600
@@ -41,13 +40,18 @@
 # define CLOSE_EVENT_NUMBER 17
 
 /*  Key codes  */
-# define ESCAPE_KEY_CODE 65307
+# define ESCAPE_KEY_CODE 	65307
+# define LEFT_KEY_CODE		65361
+# define RIGHT_KEY_CODE		65363
+# define UP_KEY_CODE		65362
+# define DOWN_KEY_CODE 		65364
 
 /*  Types  */
 typedef enum e_fractal_set
 {
 	MANDELBROT,
-	JULIA
+	JULIA,
+	BURNING_SHIP
 }				t_fractal_set;
 
 typedef enum e_mouse_events
@@ -98,6 +102,7 @@ void	parse_args(int argc, const char *argv[], t_fractol_data *f);
 /*  Fractals  */
 int		mandelbrot(double cr, double ci);
 int		julia(double cr, double ci, double kr, double ki);
+int		burning_ship(double cr, double ci);
 
 /*  Events handlers  */
 int		mouse_handler_1(int button, int x, int y, void *param);
@@ -112,6 +117,7 @@ void	close_window(t_fractol_data *f);
 
 /*  render functios  */
 void	zoom(int x, int y, t_zoom zoom, t_fractol_data *f);
+void	move(int direction, t_fractol_data *f);
 void	draw_image(t_fractol_data *f);
 
 /*  exits functions  */

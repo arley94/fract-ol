@@ -51,7 +51,7 @@ SRC_FILES	= main.c 	\
 			  draw.c \
 			  events_handlers_1.c \
 			  events_handlers_2.c \
-			  zoom.c \
+			  render.c \
 			  parse_args.c \
 			  init.c \
 			  clean_exit.c
