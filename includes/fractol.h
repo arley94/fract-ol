@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 08:47:41 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/02/21 20:02:08 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/02/22 12:43:32 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,24 +75,24 @@ typedef struct s_img_data {
 
 typedef struct s_fractol_data
 {
-	t_fractal_set	set;
-	t_img_data		img;
-	void			*mlx_ptr;
-	void			*win_ptr;
-	double			min_r;
-	double			max_r;
-	double			min_i;
-	double			max_i;
-	double			r_span;
-	double			i_span;
-	double			r_center;
-	double			i_center;
-	double			kr;
-	double			ki;
-	int				color;
+	t_fractal_set			set;
+	t_img_data				img;
+	void					*mlx_ptr;
+	void					*win_ptr;
+	double					min_r;
+	double					max_i;
+	double					r_span;
+	double					i_span;
+	double					kr;
+	double					ki;
+	int						color;
+	struct s_fractol_data	*julia;
 }	t_fractol_data;
 
 /*  Initializations functions  */
+void	init_fractol_data(t_fractol_data *f);
+void	init_aux_fractol(t_fractol_data *f);
+void	init_mlx(t_fractol_data *f);
 void	parse_args(int argc, const char *argv[], t_fractol_data *f);
 
 /*  Fractals  */
@@ -100,9 +100,15 @@ int		mandelbrot(double cr, double ci);
 int		julia(double cr, double ci, double kr, double ki);
 
 /*  Events handlers  */
-int		mouse_handler(int button, int x, int y, void *param);
-int		keyboard_handler(int key_code, void *param);
-int		close_handler(void *param);
+int		mouse_handler_1(int button, int x, int y, void *param);
+int		mouse_handler_2(int button, int x, int y, void *param);
+int		keyboard_handler_1(int key_code, void *param);
+int		keyboard_handler_2(int key_code, void *param);
+int		close_handler_1(void *param);
+int		close_handler_2(void *param);
+
+/*  Actions functions  */
+void	close_window(t_fractol_data *f);
 
 /*  render functios  */
 void	zoom(int x, int y, t_zoom zoom, t_fractol_data *f);
@@ -110,6 +116,6 @@ void	draw_image(t_fractol_data *f);
 
 /*  exits functions  */
 void	clean_and_exit(t_fractol_data *f, int status);
-void	display_help_exit(void);
+void	display_help_exit(t_fractol_data *f);
 
 #endif

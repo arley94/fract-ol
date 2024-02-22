@@ -49,9 +49,11 @@ SRC_PATH	= src/
 SRC_FILES	= main.c 	\
 			  fractals.c \
 			  draw.c \
-			  events_handlers.c \
+			  events_handlers_1.c \
+			  events_handlers_2.c \
 			  zoom.c \
 			  parse_args.c \
+			  init.c \
 			  clean_exit.c
 SRC 		= $(addprefix $(SRC_DIR), $(SRC_FILES))
 

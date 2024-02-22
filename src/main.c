@@ -6,43 +6,31 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:55:54 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/02/21 20:01:06 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/02/22 12:45:14 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
 
-void	init_fractol_data(t_fractol_data *f)
+void	draw_images(t_fractol_data *f)
 {
-	f->set = MANDELBROT;
-	f->img.addr = NULL;
-	f->img.img_ptr = NULL;
-	f->mlx_ptr = NULL;
-	f->win_ptr = NULL;
-	f->r_span = INITIAL_REAL_SPAN;
-	f->i_span = INITIAL_REAL_SPAN * HEIGHT / WIDTH;
-	f->r_center = INITIAL_CENTER_X;
-	f->i_center = INITIAL_CENTER_Y;
-	f->kr = 0.353;
-	f->ki = 0.288;
-	f->color = 0x550066;
-	f->min_r = f->r_center - f->r_span / 2;
-	f->max_i = f->i_center + f->i_span / 2;
+	draw_image(f);
+	if (f->set == MANDELBROT && f->julia)
+		draw_image(f->julia);
 }
 
-void	ft_init_mlx(t_fractol_data *f)
+void	set_events_handlers(t_fractol_data *f)
 {
-	f->mlx_ptr = mlx_init();
-	if (!f->mlx_ptr)
-		clean_and_exit(f, EXIT_FAILURE);
-	f->win_ptr = mlx_new_window(f->mlx_ptr, WIDTH, HEIGHT, "Fractol");
-	if (!f->win_ptr)
-		clean_and_exit(f, EXIT_FAILURE);
-	f->img.img_ptr = mlx_new_image(f->mlx_ptr, WIDTH, HEIGHT);
-	if (!f->img.img_ptr)
-		clean_and_exit(f, EXIT_FAILURE);
-	f->img.addr = mlx_get_data_addr(f->img.img_ptr, &(f->img.bits_per_pixel),
-			&(f->img.line_length), &(f->img.endian));
+	mlx_mouse_hook(f->win_ptr, mouse_handler_1, f);
+	mlx_key_hook(f->win_ptr, keyboard_handler_1, f);
+	mlx_hook(f->win_ptr, CLOSE_EVENT_NUMBER, 0, close_handler_1, f);
+	if (f->set == MANDELBROT && f->julia)
+	{
+		mlx_mouse_hook(f->julia->win_ptr, mouse_handler_2, f->julia);
+		mlx_key_hook(f->julia->win_ptr, keyboard_handler_2, f);
+		mlx_hook(f->julia->win_ptr, CLOSE_EVENT_NUMBER, 0, close_handler_2,
+			f);
+	}
 }
 
 int	main(int argc, char const *argv[])
@@ -50,14 +38,15 @@ int	main(int argc, char const *argv[])
 	t_fractol_data	f_data;
 
 	if (argc == 1)
-		display_help_exit();
+		display_help_exit(&f_data);
 	init_fractol_data(&f_data);
+	f_data.mlx_ptr = mlx_init();
+	if (!f_data.mlx_ptr)
+		clean_and_exit(&f_data, EXIT_FAILURE);
 	parse_args(argc, argv, &f_data);
-	ft_init_mlx(&f_data);
-	draw_image(&f_data);
-	mlx_mouse_hook(f_data.win_ptr, mouse_handler, &f_data);
-	mlx_key_hook(f_data.win_ptr, keyboard_handler, &f_data);
-	mlx_hook(f_data.win_ptr, CLOSE_EVENT_NUMBER, 0, close_handler, &f_data);
+	init_mlx(&f_data);
+	draw_images(&f_data);
+	set_events_handlers(&f_data);
 	mlx_loop(f_data.mlx_ptr);
 	return (0);
 }

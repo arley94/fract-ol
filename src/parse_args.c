@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:46:08 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/02/20 08:28:48 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/02/22 12:46:12 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,14 @@ void	parse_julia_values(int argc, const char *argv[], t_fractol_data *f)
 	if (argc == 4)
 	{
 		if (!ft_atof(argv[2], &f->kr) || !ft_atof(argv[3], &f->ki))
-			display_help_exit();
+			display_help_exit(f);
 	}
 	else if (argc == 5)
 	{
 		if (!ft_atof(argv[2], &f->kr) || !ft_atof(argv[3], &f->ki))
-			display_help_exit();
+			display_help_exit(f);
 		if (!ft_atocolor(argv[4], &f->color))
-			display_help_exit();
+			display_help_exit(f);
 	}
 }
 
@@ -70,7 +70,9 @@ void	parse_others(int argc, const char *argv[], t_fractol_data *f)
 	if (argc == 3)
 	{
 		if (!ft_atocolor(argv[2], &f->color))
-			display_help_exit();
+			display_help_exit(f);
+		if (f->julia)
+			f->julia->color = f->color;
 	}
 }
 
@@ -80,18 +82,20 @@ void	parse_args(int argc, const char *argv[], t_fractol_data *f)
 		f->set = MANDELBROT;
 	else if (ft_strncmp(argv[1], "J", 2) == 0)
 		f->set = JULIA;
+	else if (ft_strncmp(argv[1], "MJ", 3) == 0)
+		init_aux_fractol(f);
 	else
-		display_help_exit();
+		display_help_exit(f);
 	if (f->set == JULIA)
 	{
 		if (argc == 3 || argc > 5)
-			display_help_exit();
+			display_help_exit(f);
 		parse_julia_values(argc, argv, f);
 	}
 	else if (f->set == MANDELBROT)
 	{
 		if (argc > 3)
-			display_help_exit();
+			display_help_exit(f);
 		parse_others(argc, argv, f);
 	}
 }
