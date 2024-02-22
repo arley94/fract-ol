@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:46:08 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/02/22 15:25:16 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:29:53 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	parse_args(int argc, const char *argv[], t_fractol_data *f)
 			display_help_exit(f);
 		parse_julia_values(argc, argv, f);
 	}
-	else if (f->set == MANDELBROT)
+	else
 	{
 		if (argc > 3)
 			display_help_exit(f);
