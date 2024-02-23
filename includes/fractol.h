@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 08:47:41 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/02/22 18:28:52 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/02/23 08:51:31 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@
 # define S_KEY_CODE 		115
 # define C_KEY_CODE			99
 # define R_KEY_CODE			114
+# define SPACE_KEY_CODE		32
 
 /*  Types  */
 typedef enum e_fractal_set
@@ -125,16 +126,19 @@ int		close_handler_2(void *param);
 void	close_window(t_fractol_data *f);
 
 /*  render functios  */
-void	zoom(int x, int y, t_zoom zoom, t_fractol_data *f);
-void	move(int direction, t_fractol_data *f);
-void	shift_pallette(t_fractol_data *f);
-void	change_pallete(t_fractol_data *f);
+void	re_draw_zoom(int x, int y, t_zoom zoom, t_fractol_data *f);
+void	re_draw_move(int direction, t_fractol_data *f);
+void	re_draw_shift_pallette(t_fractol_data *f);
+void	re_draw_interpollated_pallete(t_fractol_data *f);
+void	re_draw_random_pallete(t_fractol_data *f);
+void	re_draw_change_fractal(t_fractol_data *f);
 void	draw_image(t_fractol_data *f);
+
+/*  Colors functions  */
 int		get_color(int nb_iter, t_fractol_data *f);
 void	create_colors_pallette(t_fractol_data *f);
 void	interpolated_pallette(t_fractol_data *f);
 void	random_pallette(t_fractol_data *f);
-void	generate_random_pallette(t_fractol_data *f);
 
 /*  exits functions  */
 void	clean_and_exit(t_fractol_data *f, int status);

@@ -48,10 +48,10 @@ INCLUDE = -I ./includes/
 SRC_PATH	= src/
 SRC_FILES	= main.c 	\
 			  fractals.c \
-			  draw.c \
+			  draw_1.c \
+			  draw_2.c \
 			  events_handlers_1.c \
 			  events_handlers_2.c \
-			  render.c \
 			  parse_args.c \
 			  init.c \
 			  clean_exit.c \
