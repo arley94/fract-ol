@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: acoto-gu <acoto-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 15:49:44 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/02/22 20:57:05 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:28:28 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	interpolate(int startcolor, int endcolor, double fraction)
 	start_rgb[0] = (end_rgb[0] - start_rgb[0]) * fraction + start_rgb[0];
 	start_rgb[1] = (end_rgb[1] - start_rgb[1]) * fraction + start_rgb[1];
 	start_rgb[2] = (end_rgb[2] - start_rgb[2]) * fraction + start_rgb[2];
-	return (0xFF << 24 | start_rgb[0] << 16 | start_rgb[1] << 8 | start_rgb[2]);
+	return (start_rgb[0] << 16 | start_rgb[1] << 8 | start_rgb[2]);
 }
 
 void	interpolated_pallette(t_fractol_data *f)

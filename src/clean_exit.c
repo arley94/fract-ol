@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: acoto-gu <acoto-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:10:57 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/02/22 20:56:26 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/02/23 11:47:20 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,7 @@ void	clean_and_exit(t_fractol_data *f, int status)
 		free(f->pallette);
 	close_window(f);
 	if (f->mlx_ptr)
-	{
-		if (OS == 0)
-			mlx_destroy_display(f->mlx_ptr);
 		free(f->mlx_ptr);
-	}
 	exit(status);
 }
 

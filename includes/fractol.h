@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: acoto-gu <acoto-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 08:47:41 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/02/23 08:51:31 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:05:20 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 
 # ifdef LINUX 
 #  include "../minilibx-linux/mlx.h"
-#  define OS 0
+#  include "linux_keys.h"
 # else
 #  include "../minilibx-mac/mlx.h"
-#  define OS 1
+#  include "mac_keys.h"
 # endif
 
 /*  Dimensions	*/
@@ -39,17 +39,6 @@
 
 /*  Events  */
 # define CLOSE_EVENT_NUMBER 17
-
-/*  Key codes  */
-# define ESCAPE_KEY_CODE 	65307
-# define LEFT_KEY_CODE		65361
-# define RIGHT_KEY_CODE		65363
-# define UP_KEY_CODE		65362
-# define DOWN_KEY_CODE 		65364
-# define S_KEY_CODE 		115
-# define C_KEY_CODE			99
-# define R_KEY_CODE			114
-# define SPACE_KEY_CODE		32
 
 /*  Types  */
 typedef enum e_fractal_set
@@ -75,7 +64,8 @@ typedef enum e_zoom
 	ZOOM_OUT
 }				t_zoom;
 
-typedef struct s_img_data {
+typedef struct s_img_data
+{
 	void	*img_ptr;
 	char	*addr;
 	int		bits_per_pixel;

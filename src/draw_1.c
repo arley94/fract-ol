@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: acoto-gu <acoto-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 13:36:52 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/02/23 08:54:54 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/02/23 11:29:38 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static int	calculate_fractal(t_fractol_data *f, double pr, double pi)
 {
 	int	nb_iter;
 
+	nb_iter = 0;
 	if (f->set == MANDELBROT)
 		nb_iter = mandelbrot(pr, pi);
 	else if (f->set == JULIA)
