@@ -22,9 +22,9 @@ ifeq ($(OS), linux)
 	MLX			= $(MLX_PATH)$(MLX_NAME)
 	MLX_FLAGS 	= -lmlx -lXext -lX11
 else
-	MLX_PATH	= minilibx-mac/
-	MLX_NAME	= libmlx.a
-	MLX			= $(MLX_PATH)$(MLX_NAME)
+# MLX_PATH	= minilibx-mac/
+# MLX_NAME	= libmlx.a
+# MLX		= $(MLX_PATH)$(MLX_NAME)
 	MLX_FLAGS	= -lmlx -framework OpenGL -framework AppKit
 endif
 
@@ -84,8 +84,10 @@ $(NAME): $(MLX) $(LIBFT) $(LIBFTPRINTF) $(OBJ_PATH) $(OBJ)
 	@echo "$(GREEN)[OK]\n$(CLEAR)$(GREEN)Success!$(CLEAR)\n"
 
 $(MLX):
+ifeq ($(OS), linux)
 	@echo "Making MiniLibX..."
 	@make -sC $(MLX_PATH)
+endif
 
 $(LIBFT):
 	@echo "Making libft..."
@@ -104,12 +106,14 @@ $(OBJ_PATH):
 	@mkdir $(OBJ_PATH)
 
 clean:
-	@echo "$(PINK)Removing .o object files.$(CLEAR)"
-	@rm -rf $(OBJ_PATH)
-	@make clean -sC $(LIBFT_PATH)
-	@make clean -sC $(LIBFTPRINTF_PATH)
-	@make clean -sC $(MLX_PATH)
-	@echo "$(GREEN)Object files removed correctly\n$(CLEAR)"
+	echo "$(PINK)Removing .o object files.$(CLEAR)"
+	rm -rf $(OBJ_PATH)
+	make clean -sC $(LIBFT_PATH)
+	make clean -sC $(LIBFTPRINTF_PATH)
+ifeq ($(OS), linux)
+	make clean -sC $(MLX_PATH)
+endif
+	echo "$(GREEN)Object files removed correctly\n$(CLEAR)"
 
 fclean: clean
 	@make fclean -sC $(LIBFT_PATH)

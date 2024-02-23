@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 08:47:41 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/02/23 12:05:20 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:49:08 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 #  include "../minilibx-linux/mlx.h"
 #  include "linux_keys.h"
 # else
-#  include "../minilibx-mac/mlx.h"
+//#  include "../minilibx-mac/mlx.h"
+#  include <mlx.h>
 #  include "mac_keys.h"
 # endif
 
